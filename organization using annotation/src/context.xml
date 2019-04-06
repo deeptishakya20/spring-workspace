@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd
+ http://www.springframework.org/schema/util
+ http://www.springframework.org/schema/util/spring-util.xsd">
+
+	 <context:property-placeholder location="classpath:dbconfig.properties" />
+
+	
+    	<context:component-scan base-package="com"/>
+
+	<util:list id="directors" list-class="java.util.ArrayList">
+		<value>Mark</value>
+		<value>Joe</value>
+	</util:list>
+
+	 <util:set id="branches" set-class="java.util.HashSet">
+		 <value>California</value>
+		 <value>Sydeny</value>
+	 </util:set>
+
+	 <util:map id="branchWiseHead" map-class="java.util.HashMap">
+		 <entry key="hello" value="Joe"/>
+ 		 <entry key="world" value="Jene"/>
+ 	 </util:map>
+
+	 <util:properties id="ipAddresses">
+		 <prop key="IP">11.314.67826</prop>
+		 <prop key="IP1">11.314.67826</prop>
+		
+ 	 </util:properties>
+	<util:properties id="databaseDetails">
+ 		<prop key="user">${dbconfig.port.number}</prop>
+ 		<prop key="password">${dbconfig.password}</prop>
+ 	</util:properties>
+ 
+
+</beans>
