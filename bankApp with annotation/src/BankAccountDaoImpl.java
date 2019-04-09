@@ -1,5 +1,5 @@
 package com.capgemini.bank.dao.impl;
-
+import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,20 +8,21 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import com.capgemini.bank.dao.BankAccountDao;
 import com.capgemini.bank.exception.BankAccountNotFoundException;
 import com.capgemini.bank.model.BankAccount;
 import com.capgemini.bank.util.DbUtil;
-
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+@Component
 public class BankAccountDaoImpl implements BankAccountDao {
-
+	
+	@Autowired
 	Connection connection;
 
-	public BankAccountDaoImpl(Connection connection){
-		this.connection = connection;
+	Logger logger = Logger.getLogger(BankAccountDaoImpl.class);
 
-	}
+
 
 	@Override
 	public double getBalance(long accountId) {

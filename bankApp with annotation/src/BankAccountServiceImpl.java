@@ -1,12 +1,9 @@
 package com.capgemini.bank.service.impl;
-
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.apache.log4j.Logger;
-
 import com.capgemini.bank.dao.BankAccountDao;
 import com.capgemini.bank.dao.impl.BankAccountDaoImpl;
 import com.capgemini.bank.exception.BankAccountNotFoundException;
@@ -14,16 +11,24 @@ import com.capgemini.bank.exception.LowBalanceException;
 import com.capgemini.bank.model.BankAccount;
 import com.capgemini.bank.service.BankAccountService;
 import com.capgemini.bank.util.DbUtil;
+import org.springframework.stereotype.*;
+import org.springframework.beans.factory.annotation.*;
+import com.mysql.jdbc.Connection;
 
+
+@Component
 public class BankAccountServiceImpl implements BankAccountService {
 
-	static Logger logger = Logger.getLogger(BankAccountServiceImpl.class);
-
+	static final Logger logger = Logger.getLogger(BankAccountServiceImpl.class);
+	
+	@Autowired
 	private BankAccountDao bankAccountDao;
 
-	public BankAccountServiceImpl(BankAccountDao bankAccountDao) {
+	
+	
+	public BankAccountServiceImpl() {
 
-		this.bankAccountDao = bankAccountDao;
+		this.bankAccountDao = new BankAccountDaoImpl();
 
 	}
 
