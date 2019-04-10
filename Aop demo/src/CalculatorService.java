@@ -18,7 +18,16 @@ public class CalculatorService implements Calculator{
 	public void division(Double number1, Double number2){
 
 		System.out.println(number1/number2);
+		throw new IllegalArgumentException();	
 
+
+	}
+
+	
+	public void printException(){
+
+		System.out.println("Illegal argument exeption");
+	 	
 	}
 
 }

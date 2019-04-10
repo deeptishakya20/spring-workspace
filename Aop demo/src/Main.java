@@ -11,6 +11,7 @@ public class Main{
 	Calculator calculator = (Calculator)context.getBean("calculator");
 	calculator.add(12,18);
 	calculator.division(100.0,10.0);
+	
 			
 	}
 

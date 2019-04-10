@@ -40,22 +40,32 @@ public class CalculatorAspect{
 	@Around("execution(* com.capgemini.spring.calculator.CalculatorService.division(..))")
 	public void log(ProceedingJoinPoint jp) throws Throwable{
 	
-	Object[] argument = jp.getArgs();
-	Double firstArg = Double.parseDouble(argument[0].toString());
-	Double secondArg = Double.parseDouble(argument[1].toString());
+		Object[] argument = jp.getArgs();
+		Double firstArg = Double.parseDouble(argument[0].toString());
+		Double secondArg = Double.parseDouble(argument[1].toString());
 
-	if(secondArg!=0){
-		System.out.println("Done with aspect before around division");
-		jp.proceed();
-		System.out.println("Done with aspect after around division");
-	}
-	else
-		System.out.println("Divisor can not be zero");			
+		if(secondArg!=0){
+			jp.proceed();
+			System.out.println("Done with aspect around division");
+		}
+		else{
+			
+			
+
+		}
+				
 
 	}	
+
+
+	@AfterThrowing(pointcut = "execution(* com.capgemini.spring.calculator.Calculator.printException(..))",
+	throwing = "exception")
+	public void afterThrowing(Throwable exception)throws Exception{
+
+		System.out.println(exception);
+
+	}
+
 	
 	
-
-
-
 }

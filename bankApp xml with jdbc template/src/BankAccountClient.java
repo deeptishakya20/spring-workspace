@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
+
 import com.capgemini.bank.exception.BankAccountNotFoundException;
 import com.capgemini.bank.exception.LowBalanceException;
 import com.capgemini.bank.model.BankAccount;
@@ -18,13 +18,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BankAccountClient {
 
-		static Logger logger = Logger.getLogger(BankAccountClient.class);
+	static final Logger logger = Logger.getLogger(BankAccountClient.class);
 
 	public static void main(String args[]) throws Exception {
 
 		
 	ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-	BankAccountService bankService  = (BankAccountService)context.getBean(BankAccountServiceImpl.class);
+	BankAccountService bankService  = (BankAccountService)context.getBean("service");
 
 
 		int choice;
@@ -61,10 +61,10 @@ public class BankAccountClient {
 					accountBalance = Double.parseDouble(reader.readLine());
 					BankAccount account = new BankAccount(accountHolderName, accountType, accountBalance);
 
-					//if (bankService.addNewBankAccount(account))
-						//System.out.println("Account created successfully");
-					//else
-						//System.out.println("Failed to create new account");
+					if (bankService.addNewBankAccount(account))
+						System.out.println("Account created successfully");
+					else
+						System.out.println("Failed to create new account");
 					break;
 
 				case 2:
@@ -133,7 +133,8 @@ public class BankAccountClient {
 
 					break;
 
-				case 8:
+				
+					case 8:
 
 					System.out.println("Enter Account Id");
 					accountId = Long.parseLong(reader.readLine());

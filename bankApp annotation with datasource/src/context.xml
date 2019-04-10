@@ -10,10 +10,15 @@
 
 	<context:component-scan base-package="com"/>
 
- 	
-	<util:properties id="properties" location="dbConfig.properties"/>
+ 
+	<bean id ="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	
+		<property name = "driverClassName" value = "com.mysql.jdbc.Driver"/>
+		<property name = "url" value = "jdbc:mysql://localhost:3306/bankappdb"/>
+		<property name = "username" value = "root"/>
+		<property name = "password" value = "root"/>
 
-	<bean id = "connection" class = "com.capgemini.bank.util.DbUtil" factory-method="getconnection">
-		<constructor-arg ref="properties" />
 	</bean>
+
+
 </beans>

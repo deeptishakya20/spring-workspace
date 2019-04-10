@@ -1,30 +1,35 @@
 package com.capgemini.bank.client;
-
+//import com.capgemini.bank.dao.*;
+import com.capgemini.bank.dao.impl.*;
+//import com.capgemini.bank.service.*;
+import com.capgemini.bank.service.impl.*;
+//import com.capgemini.bank.util.*;
+import com.capgemini.bank.config.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
+
 import com.capgemini.bank.exception.BankAccountNotFoundException;
 import com.capgemini.bank.exception.LowBalanceException;
 import com.capgemini.bank.model.BankAccount;
 import com.capgemini.bank.service.BankAccountService;
 import com.capgemini.bank.service.impl.BankAccountServiceImpl;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class BankAccountClient {
 
-		static Logger logger = Logger.getLogger(BankAccountClient.class);
+	static final Logger logger = Logger.getLogger(BankAccountClient.class);
 
 	public static void main(String args[]) throws Exception {
 
 		
-	ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-	BankAccountService bankService  = (BankAccountService)context.getBean(BankAccountServiceImpl.class);
+	ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+	BankAccountService bankService  = context.getBean(BankAccountServiceImpl.class);
 
 
 		int choice;
@@ -61,10 +66,10 @@ public class BankAccountClient {
 					accountBalance = Double.parseDouble(reader.readLine());
 					BankAccount account = new BankAccount(accountHolderName, accountType, accountBalance);
 
-					//if (bankService.addNewBankAccount(account))
-						//System.out.println("Account created successfully");
-					//else
-						//System.out.println("Failed to create new account");
+					if (bankService.addNewBankAccount(account))
+						System.out.println("Account created successfully");
+					else
+						System.out.println("Failed to create new account");
 					break;
 
 				case 2:
